@@ -30,7 +30,10 @@ public class HitParticle : MonoBehaviour {
             return;
         if (other.tag == "P1" || other.tag == "P2" || other.tag == "P3" || other.tag == "P4")
         { 
-            Debug.Log("worked?");
+            if (other.GetComponent<HeroScript>() != null)
+            {
+                other.GetComponent<HeroScript>().DoDamage(10);
+            }
             Destroy(gameObject);
         }
     }

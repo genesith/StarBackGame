@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PhotonUnitControl : MonoBehaviour {
     Vector3 target;
-    bool startmoving = false;
+    bool IsAlive = true;
 
     private float speed = 4.5f;
 	// Use this for initialization
 	void Start () {
-        target = this.transform.position;
+        target = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (IsAlive)
 
         if (Input.GetMouseButtonDown(1))
         {

@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class SendInfo : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    bool stun = false;
+    float stunfreetime;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
         bool RMB = Input.GetMouseButtonDown(1);
+
+
+        if (stun)
+        {
+            if (Time.time > stunfreetime)
+                stun = false;
+            else
+                return;
+        }
 
         if (RMB)
         {
@@ -21,4 +33,14 @@ public class SendInfo : MonoBehaviour {
         
         
 	}
+
+    [PunRPC]
+    public void GotStunned(float time)
+    {
+        stun = true;
+        stunfreetime = Time.time + time;
+        this.GetComponent<PhotonView>().RPC("ReceivedStop", PhotonTargets.All);
+
+    }
+
 }

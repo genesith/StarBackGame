@@ -254,6 +254,10 @@ MonoBehaviour:
   - {fileID: 114354423285741338}
   - {fileID: 114122656717686166}
   - {fileID: 114153449362325104}
+  waitingTime:
+  - 1
+  - 8
+  - 15
 --- !u!114 &114354423285741338
 MonoBehaviour:
   m_ObjectHideFlags: 1

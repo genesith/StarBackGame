@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/starbackgame/StarBackGame/buildtarget/StarBackGame.exe
+D:/starbackgame/StarBackGame/buildtarget2/StarBackGame.exe
 SceneListBegin?
 Assets/Scenes/StartScreen.unity
 Assets/Scenes/HeroSelect.unity
@@ -189,7 +189,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
-fd00e271d91ead336c4ecf9054191c94 Assembly-CSharp.dll:.CDManager
+bddcd6aa9807923a49cbaf83d3d859af Assembly-CSharp.dll:.CDManager
 ee1e0b3c2198fd86b8383be4b7224642 Assembly-CSharp.dll:.HeroScript
 d75dc834c5dec688db75a55a1724c90f UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 486cd95c82d8305219c352c06b776e1f UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput

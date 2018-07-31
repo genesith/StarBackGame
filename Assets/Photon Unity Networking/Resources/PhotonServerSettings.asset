@@ -43,4 +43,6 @@ MonoBehaviour:
   - LockinRPC
   - putinhimself
   - putinvictim
+  - GotStunned
+  - ReceivedStop
   DisableAutoOpenWizard: 1

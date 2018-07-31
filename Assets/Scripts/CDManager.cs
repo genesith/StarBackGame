@@ -12,6 +12,8 @@ public class CDManager : Singleton<CDManager>
     private bool[] coolingDown;
     private bool[] doit;
 
+
+    [SerializeField]
     private float[] waitingTime;
 
     // Update is called once per frame
@@ -46,4 +48,10 @@ public class CDManager : Singleton<CDManager>
         doit[cdme] = true;
         coolingDown[cdme] = true;
     }
+
+    public bool SkillAvailable(int skill)
+    {
+        return !coolingDown[skill];
+    }
+
 }

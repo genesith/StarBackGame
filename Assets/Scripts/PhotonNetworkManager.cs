@@ -40,6 +40,10 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
                 {
                     SelectCharacter(1);
                 }
+                if (GUI.Button(new Rect(10, 50, 100, 30), "푸틴"))
+                {
+                    SelectCharacter(2);
+                }
                 break;
             case 4:
                 break;
@@ -87,6 +91,12 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
                 myPlayer.GetComponent<SendInfo>().enabled = true;
                 myPlayer.GetComponent<JigglypuffScript>().enabled = true;
                 myPlayer.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, "P" + PhotonNetwork.player.ID.ToString()) ;
+                break;
+            case 2:
+                GameObject myPlayer2 = PhotonNetwork.Instantiate("putin", mySpawn.transform.position, mySpawn.transform.rotation, 0);
+                myPlayer2.GetComponent<SendInfo>().enabled = true;
+                myPlayer2.GetComponent<putin>().enabled = true;
+                myPlayer2.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, "P" + PhotonNetwork.player.ID.ToString());
                 break;
             default:
                 break;

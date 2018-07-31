@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitParticle : MonoBehaviour {
+public class HitParticle : Photon.MonoBehaviour {
 
     [SerializeField]
     int particletype;
     [SerializeField]
     float speed;
     public int owningplayer;
+    GameObject OwningObject;
 
     public Vector2 newposition;
     Vector3 normalizeDirection;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -26,13 +27,29 @@ public class HitParticle : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag == "P" + owningplayer.ToString())
             return;
         if (other.tag == "P1" || other.tag == "P2" || other.tag == "P3" || other.tag == "P4")
         { 
             if (other.GetComponent<HeroScript>() != null)
             {
-                other.GetComponent<HeroScript>().DoDamage(10);
+                switch (particletype)
+                {
+                    case 0: //푸린 기본공격
+                        Debug.Log("this case?");
+                        other.GetComponent<HeroScript>().DoDamage(10);
+                        break;
+                    case 1:
+                        other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All,2.0f);
+                        break;
+                    case 2:
+                        other.GetComponent<PhotonView>().RPC("putinvictim", PhotonTargets.All);
+                        other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All, 2.0f);
+                        OwningObject.GetComponent<PhotonView>().RPC("putinhimself", PhotonTargets.All);
+                        break;
+                }
+
             }
             Destroy(gameObject);
         }
@@ -46,9 +63,11 @@ public class HitParticle : MonoBehaviour {
         }
     }
     [PunRPC]
-    public void ParticleInit(Vector3 movePos, int player)
+    public void ParticleInit(Vector3 movePos, int player, GameObject owner)
     {
         newposition = movePos;
         owningplayer = player;
+        OwningObject = owner;
     }
+
 }

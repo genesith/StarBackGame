@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SendInfo : MonoBehaviour {
+public class SendInfo : Photon.MonoBehaviour {
 
+    bool stun = false;
+    float stunfreetime;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,8 +13,15 @@ public class SendInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        bool RMB = Input.GetMouseButtonDown(1);
 
+        bool RMB = Input.GetMouseButtonDown(1);
+        if (stun)
+        {
+            if (Time.time > stunfreetime)
+                stun = false;
+            else
+                return;
+        }
         if (RMB)
         {
             Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,4 +30,12 @@ public class SendInfo : MonoBehaviour {
         
         
 	}
+    [PunRPC]
+    public void GotStunned(float time)
+    {
+        stun = true;
+        stunfreetime = Time.time + time;
+        this.GetComponent<PhotonView>().RPC("ReceivedStop", PhotonTargets.All);
+
+    }
 }

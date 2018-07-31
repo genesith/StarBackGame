@@ -40,4 +40,6 @@ MonoBehaviour:
   - ParticleInit
   - Tagger
   - StartGame
+  - GotStunned
+  - ReceivedStop
   DisableAutoOpenWizard: 1

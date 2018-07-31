@@ -29,4 +29,10 @@ public class ReceiveInfo : MonoBehaviour {
     {
         newposition = movePos;
     }
+
+    [PunRPC]
+    public void ReceivedStop()
+    {
+        newposition = transform.position;
+    }
 }

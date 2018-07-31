@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ConstantManager : MonoBehaviour {
 
-    static ConstantManager Manager;
+    public static ConstantManager Manager;
+    public int[] CharacterList;
+
+
+    // CHANGE WHEN MORE PLAYERS ARE ALLOWED;
+    public int numplayers = 2;
 
     void Awake()
     {

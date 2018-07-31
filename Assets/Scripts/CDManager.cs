@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CDManager : Singleton<CDManager>
 {
-
+    [SerializeField]
     private Image[] CDImages;
     private int NumberOfCooldowns;
 

@@ -40,4 +40,7 @@ MonoBehaviour:
   - ParticleInit
   - Tagger
   - StartGame
+  - LockinRPC
+  - putinhimself
+  - putinvictim
   DisableAutoOpenWizard: 1

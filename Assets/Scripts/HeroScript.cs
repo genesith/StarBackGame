@@ -51,4 +51,14 @@ public class HeroScript : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+    [PunRPC]
+    public void putinvictim()
+    {
+        this.transform.position = new Vector3(-3, 0, 0);
+    }
+    [PunRPC]
+    public void putinhimself()
+    {
+        this.transform.position = new Vector3(3, 0, 0);
+    }
 }

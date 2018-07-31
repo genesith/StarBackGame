@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/PhotonFightScene.unity
+- path: Assets/Scenes/HeroSelect.unity
   isLoaded: 1
   isActive: 1

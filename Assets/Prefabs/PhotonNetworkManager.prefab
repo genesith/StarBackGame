@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4235794226129898}
   - component: {fileID: 114777448577413166}
+  - component: {fileID: 114499521000890152}
   m_Layer: 0
   m_Name: PhotonNetworkManager
   m_TagString: Untagged
@@ -40,6 +41,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114499521000890152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1335602387570890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  OwnerShipWasTransfered: 0
+  prefixBackup: -1
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  currentMasterID: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &114777448577413166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,3 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5adc81030ee3154494aec62579ac865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Canvases:
+  - {fileID: 1543788416679060, guid: 60e0d7ba8d3c60c48ae9e2e84f27a3d3, type: 2}

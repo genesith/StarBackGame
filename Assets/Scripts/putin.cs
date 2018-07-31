@@ -49,9 +49,5 @@ public class putin : MonoBehaviour
         }
 
     }
-    [PunRPC]
-    void Tagger(string text)
-    {
-        this.tag = text;
-    }
+    
 }

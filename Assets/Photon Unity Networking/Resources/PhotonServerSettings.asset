@@ -45,4 +45,5 @@ MonoBehaviour:
   - putinvictim
   - GotStunned
   - ReceivedStop
+  - GotDamaged
   DisableAutoOpenWizard: 1

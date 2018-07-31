@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class GameManager : Photon.MonoBehaviour {
 
+    public static GameManager Manager;
     [SerializeField]
-    GameObject[] Spawns;
+    public GameObject[] Spawns;
 
     [SerializeField]
     GameObject[] Canvases;
     GameObject Canvas;
 
+    public int playernum;
 	// Use this for initialization
 	void Start () {
         StartCoroutine(DelayedSpawn());
-        
-	}
+        Manager = this;
+        playernum = PhotonNetwork.player.ID;
+
+    }
 	
     IEnumerator DelayedSpawn()
     {
@@ -27,6 +31,23 @@ public class GameManager : Photon.MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void Die(GameObject DeadDude)
+    {
+        StartCoroutine(DieRoutine(DeadDude));
+    }
+
+    IEnumerator DieRoutine(GameObject DeadDude)
+    {
+        HeroScript killme = DeadDude.GetComponent<HeroScript>();
+        DeadDude.SetActive(false);
+        yield return new WaitForSeconds(killme.respawntime);
+        DeadDude.SetActive(true);
+        killme.CHealth = killme.maxhealth;
+        DeadDude.transform.position = Spawns[killme.playernum-1].transform.position;
+        DeadDude.GetComponent<ReceiveInfo>().ReceivedStop();
+    }
+
 
     void SelectCharacter(int charcode)
     {
@@ -40,7 +61,7 @@ public class GameManager : Photon.MonoBehaviour {
                 myPlayer = PhotonNetwork.Instantiate("jigglypuff", mySpawn.transform.position, mySpawn.transform.rotation, 0);
                 myPlayer.GetComponent<SendInfo>().enabled = true;
                 myPlayer.GetComponent<JigglypuffScript>().enabled = true;
-                myPlayer.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, "P" + PhotonNetwork.player.ID.ToString());
+                myPlayer.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, PhotonNetwork.player.ID);
                 
                 Canvas= Instantiate(Canvases[0]);
                 
@@ -51,7 +72,7 @@ public class GameManager : Photon.MonoBehaviour {
                 myPlayer = PhotonNetwork.Instantiate("putin", mySpawn.transform.position, mySpawn.transform.rotation, 0);
                 myPlayer.GetComponent<SendInfo>().enabled = true;
                 myPlayer.GetComponent<putin>().enabled = true;
-                myPlayer.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, "P" + PhotonNetwork.player.ID.ToString());
+                myPlayer.GetComponent<PhotonView>().RPC("Tagger", PhotonTargets.All, PhotonNetwork.player.ID);
 
                 Canvas = Instantiate(Canvases[1]);
                 break;

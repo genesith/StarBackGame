@@ -30,17 +30,17 @@ public class HitParticle : Photon.MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.tag == "P" + owningplayer.ToString())
             return;
         if (other.tag == "P1" || other.tag == "P2" || other.tag == "P3" || other.tag == "P4")
         {
-            if (other.GetComponent<HeroScript>() != null)
+            if (other.GetComponent<HeroScript>() != null && (GameManager.Manager.playernum == owningplayer))
+        
             {
                 switch (particletype)
                 {
                     case 0: //푸린 기본공격
-                        other.GetComponent<HeroScript>().DoDamage(10);
+                        other.GetComponent<PhotonView>().RPC("GotDamaged", PhotonTargets.All, 10);
                         break;
                     case 1: //푸린 스턴
                         other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All, 2.0f);
@@ -55,6 +55,7 @@ public class HitParticle : Photon.MonoBehaviour
             }
             Destroy(gameObject);
         }
+        
     }
     private void OnTriggerExit2D(Collider2D other)
     {

@@ -9,7 +9,7 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
     GameObject[] Spawns;
     [SerializeField]
     GameObject[] Canvases;
-
+    int reqppl;
 
     private int state = 0;
 	void OnGUI()
@@ -34,7 +34,7 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
                 }
                 break;
             case 2://Connected to a room, need to wait for it to fill
-                int reqppl = 2;
+                
 
                 string currentstate = "방에 연결 되었습니다, 현재 " + PhotonNetwork.playerList.Length + "명 접속중. " + reqppl + "명이 되면 게임이 시작됩니다";
                 GUI.color = Color.black;
@@ -76,7 +76,7 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
     }
     void Start()
     {
-        
+        reqppl = ConstantManager.Manager.numplayers;
     }
     /*
     void SelectCharacter(int charcode)

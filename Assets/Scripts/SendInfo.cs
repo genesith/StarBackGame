@@ -5,6 +5,7 @@ using UnityEngine;
 public class SendInfo : MonoBehaviour {
 
     bool stun = false;
+    public bool IsAlive = true;
     float stunfreetime;
 
     // Use this for initialization
@@ -25,7 +26,7 @@ public class SendInfo : MonoBehaviour {
                 return;
         }
 
-        if (RMB)
+        if (RMB && IsAlive)
         {
             Vector2 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.GetComponent<PhotonView>().RPC("ReceivedMove", PhotonTargets.All, target);

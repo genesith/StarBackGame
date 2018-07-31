@@ -46,9 +46,5 @@ public class JigglypuffScript : Photon.MonoBehaviour {
         }
 
     }
-    [PunRPC]
-    void Tagger(string text)
-    {
-        this.tag = text;
-    }
+    
 }

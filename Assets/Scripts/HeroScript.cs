@@ -7,8 +7,12 @@ public class HeroScript : MonoBehaviour {
     HealthScript Health;
     public int maxhealth, currenthealth;
     public float healthregentime; // 이게 필요할까
+    
+    public float respawntime = 10;
 
-    private int CHealth
+    public int playernum;
+
+    public int CHealth
     {
         get
         {
@@ -20,7 +24,7 @@ public class HeroScript : MonoBehaviour {
             currenthealth = value;
             float ratio = (float) currenthealth / maxhealth;
             Health.UpdateHealth(ratio);
-            Debug.Log("Health now " + currenthealth + "/" + maxhealth);
+            //Debug.Log("Health now " + currenthealth + "/" + maxhealth);
         }
     }
 
@@ -47,10 +51,11 @@ public class HeroScript : MonoBehaviour {
         else
         {
             CHealth = 0;
-            gameObject.GetComponent<SendInfo>().enabled = false;
-            Destroy(gameObject);
+            GameManager.Manager.Die(gameObject);
+            
         }
     }
+    
     [PunRPC]
     public void putinvictim()
     {
@@ -60,5 +65,17 @@ public class HeroScript : MonoBehaviour {
     public void putinhimself()
     {
         this.transform.position = new Vector3(3, 0, 0);
+    }
+    [PunRPC]
+    void Tagger(int player)
+    {
+        this.tag = "P" + player.ToString();
+        this.playernum = player;
+    }
+
+    [PunRPC]
+    void GotDamaged(int damage)
+    {
+        DoDamage(damage);
     }
 }

@@ -12,8 +12,12 @@ public class HitParticle : Photon.MonoBehaviour
 
     public int owningplayer;
 
+    [SerializeField]
+    bool shortrange;
+
+    [SerializeField]
+    float lifetime;
     
-    PhotonView OwningphotonView;
 
     public Vector2 newposition;
     Vector3 normalizeDirection;
@@ -27,6 +31,14 @@ public class HitParticle : Photon.MonoBehaviour
 
     void Update()
     {
+        if (shortrange)
+        {
+            lifetime -= Time.deltaTime;
+            if (lifetime < 0)
+            {
+                Destroy(this);
+            }
+        }
         this.transform.position += normalizeDirection * speed * Time.deltaTime;
     }
 
@@ -43,7 +55,7 @@ public class HitParticle : Photon.MonoBehaviour
                 switch (particletype)
                 {
                     case 0: //푸린 기본공격
-                        other.GetComponent<PhotonView>().RPC("GotDamaged", PhotonTargets.All, 10);
+                        other.GetComponent<PhotonView>().RPC("GotDamaged", PhotonTargets.All, 10, owningplayer);
                         break;
                     case 1: //푸린 스턴
                         other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All, 2.0f);

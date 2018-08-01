@@ -42,7 +42,7 @@ public class HeroScript : MonoBehaviour {
 		
 	}
 
-    public void DoDamage(int damage)
+    public void DoDamage(int damage, int inflicter)
     {
         if (CHealth > damage)
         {
@@ -52,7 +52,7 @@ public class HeroScript : MonoBehaviour {
         {
             CHealth = 0;
             GameManager.Manager.Die(playernum);
-            
+            GameManager.Manager.GotKill(inflicter);
         }
     }
     
@@ -76,9 +76,9 @@ public class HeroScript : MonoBehaviour {
     }
 
     [PunRPC]
-    void GotDamaged(int damage)
+    void GotDamaged(int damage, int owningplayer)
     {
-        DoDamage(damage);
+        DoDamage(damage, owningplayer);
     }
 
     

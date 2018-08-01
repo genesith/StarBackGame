@@ -46,7 +46,6 @@ public class putin : MonoBehaviour
         }
         if (Input.GetKeyDown("e") && CDManager.Instance.SkillAvailable(2))
         {
-
             CDManager.Instance.PutOnCD(2);
             //Debug.Log("E pressed");
             //while () { if () }

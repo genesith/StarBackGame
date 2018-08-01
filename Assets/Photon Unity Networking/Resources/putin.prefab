@@ -315,6 +315,8 @@ MonoBehaviour:
   maxhealth: 60
   currenthealth: 0
   healthregentime: 0
+  respawntime: 10
+  playernum: 0
 --- !u!114 &114467203591293758
 MonoBehaviour:
   m_ObjectHideFlags: 1

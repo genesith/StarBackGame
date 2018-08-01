@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Photon.MonoBehaviour {
 
     public static GameManager Manager;
     [SerializeField]
     public GameObject[] Spawns;
+
+    [SerializeField]
+    public float gametime;
 
     [SerializeField]
     GameObject[] Canvases;
@@ -43,21 +47,32 @@ public class GameManager : Photon.MonoBehaviour {
         
     }
 
-    public void Die(int playernum)
+    public void Die(int dienum)
     {
-        PlayerList[playernum - 1].deaths += 1;
-        StartCoroutine(DieRoutine(playernum));
+        PlayerList[dienum - 1].deaths += 1;
+        PlayerList[dienum - 1].points -= 100;
+        StartCoroutine(DieRoutine(dienum));
+        if (playernum == dienum)
+        {
+            Canvas.GetComponent<OverlayScript>().IDied(PlayerList[dienum - 1].PlayerObject.GetComponent<HeroScript>().respawntime);
+        }
     }
 
-    IEnumerator DieRoutine(int playernum)
+    public void GotKill(int killernum)
     {
-        GameObject DeadDude = PlayerList[playernum - 1].PlayerObject;
+        PlayerList[killernum - 1].kills += 1;
+        PlayerList[killernum - 1].points += 200;
+    }
+
+    IEnumerator DieRoutine(int dienum)
+    {
+        GameObject DeadDude = PlayerList[dienum - 1].PlayerObject;
         HeroScript killme = DeadDude.GetComponent<HeroScript>();
         DeadDude.SetActive(false);
         yield return new WaitForSeconds(killme.respawntime);
         DeadDude.SetActive(true);
         killme.CHealth = killme.maxhealth;
-        DeadDude.transform.position = Spawns[killme.playernum-1].transform.position;
+        DeadDude.transform.position = Spawns[dienum-1].transform.position;
         DeadDude.GetComponent<ReceiveInfo>().ReceivedStop();
     }
 
@@ -98,6 +113,11 @@ public class GameManager : Photon.MonoBehaviour {
         addme.PlayerObject = GO;
         addme.name = "Player" + playerID;
         PlayerList[playerID - 1] = addme;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
     }
 
     

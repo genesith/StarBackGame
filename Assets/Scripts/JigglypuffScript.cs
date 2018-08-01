@@ -9,11 +9,19 @@ public class JigglypuffScript : Photon.MonoBehaviour {
 
     //쿨다운 구현 대충 해봄
 
+    bool stun = false;
+    float stunfreetime;
 
-    
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
+        if (stun)
+        {
+            if (Time.time > stunfreetime)
+                stun = false;
+            else
+                return;
+        }
         if (Input.GetKeyDown("q") && CDManager.Instance.SkillAvailable(0))
         {
             CDManager.Instance.PutOnCD(0);
@@ -46,5 +54,13 @@ public class JigglypuffScript : Photon.MonoBehaviour {
         }
 
     }
-    
+
+    [PunRPC]
+    public void GotStunned(float time)
+    {
+        stun = true;
+        stunfreetime = Time.time + time;
+        gameObject.GetComponent<SendInfo>().GotStunnedForInfo(stunfreetime);
+    }
+
 }

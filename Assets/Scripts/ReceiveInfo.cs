@@ -6,7 +6,7 @@ public class ReceiveInfo : MonoBehaviour {
 
     Vector2 newposition;
     public float speed;
-    public float walkRange = 0.01f;
+    public float walkRange = 0.001f;
 
 
 	// Use this for initialization

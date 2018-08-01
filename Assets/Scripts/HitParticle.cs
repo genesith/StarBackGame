@@ -53,6 +53,7 @@ public class HitParticle : Photon.MonoBehaviour
                 }
 
             }
+            gameObject.GetComponent<PhotonView>().RPC("IHitSomething", PhotonTargets.All);
             Destroy(gameObject);
         }
         
@@ -72,6 +73,11 @@ public class HitParticle : Photon.MonoBehaviour
         owningplayer = player;
         // OwningphotonView = p;
         //  OwningObject = owner;
+    }
+    [PunRPC]
+    public void IHitSomething()
+    {
+        Destroy(gameObject);
     }
 
 }

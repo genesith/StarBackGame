@@ -11,6 +11,8 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
     GameObject[] Canvases;
     int reqppl;
 
+    int playerCount = 0;
+
     private int state = 0;
 	void OnGUI()
     {
@@ -40,16 +42,30 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
                 GUI.color = Color.black;
                 GUI.Label(new Rect(Screen.width / 2 - 250, Screen.height - 120, 500, 30), currentstate, centeredTextStyle);
                 GUI.color = Color.white;
-                if (PhotonNetwork.playerList.Length == reqppl && PhotonNetwork.isMasterClient == true)
-                {//when filled, the master client calls RPC to start game.
-                    this.GetComponent<PhotonView>().RPC("StartGame", PhotonTargets.All);
-                }
+                
                 break;
             case 3://Change scene to hero select
                 break;
 
         }
     }
+    void OnPhotonPlayerConnected(PhotonPlayer other) // not seen if you're the player connecting
+    {
+        // player joined, master client then increments playerCount
+        if (PhotonNetwork.isMasterClient)
+        {
+            playerCount++;
+
+            // hide and close the room if it is full
+            if (playerCount == reqppl)
+            {
+                PhotonNetwork.room.IsVisible = false;
+                PhotonNetwork.room.IsOpen = false;
+                this.GetComponent<PhotonView>().RPC("StartGame", PhotonTargets.All);
+            }
+        }
+    }
+
 
     private void Connect()
     {
@@ -68,6 +84,13 @@ public class PhotonNetworkManager : Photon.MonoBehaviour {
     {
         Debug.Log("Joined Room");
         state = 2;
+      
+        // master client joined, set playerCount to 1
+        if (PhotonNetwork.isMasterClient)
+        {
+            playerCount = 1;
+        }
+      
     }
     void OnJoinedLobby()
     {

@@ -51,7 +51,7 @@ public class HeroScript : MonoBehaviour {
         else
         {
             CHealth = 0;
-            GameManager.Manager.Die(gameObject);
+            GameManager.Manager.Die(playernum);
             
         }
     }
@@ -67,10 +67,12 @@ public class HeroScript : MonoBehaviour {
         this.transform.position = new Vector3(3, 0, 0);
     }
     [PunRPC]
-    void Tagger(int player)
+    void InitTag(int player)
     {
         this.tag = "P" + player.ToString();
         this.playernum = player;
+
+        GameManager.Manager.InitAddToPlayerList(gameObject, player);
     }
 
     [PunRPC]
@@ -78,4 +80,6 @@ public class HeroScript : MonoBehaviour {
     {
         DoDamage(damage);
     }
+
+    
 }

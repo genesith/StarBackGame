@@ -46,4 +46,6 @@ MonoBehaviour:
   - GotStunned
   - ReceivedStop
   - GotDamaged
+  - InitTag
+  - IHitSomething
   DisableAutoOpenWizard: 1

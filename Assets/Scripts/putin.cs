@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class putin : MonoBehaviour
 {
+    bool stun = false;
+    float stunfreetime;
 
     string ability1 = "zucc";
     string ability2 = "stunpurin";
@@ -17,6 +19,13 @@ public class putin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stun)
+        {
+            if (Time.time > stunfreetime)
+                stun = false;
+            else
+                return;
+        }
         if (Input.GetKeyDown("q") && CDManager.Instance.SkillAvailable(0))
         {
             CDManager.Instance.PutOnCD(0);
@@ -49,5 +58,11 @@ public class putin : MonoBehaviour
         }
 
     }
-    
+    [PunRPC]
+    public void GotStunned(float time)
+    {
+        stun = true;
+        stunfreetime = Time.time + time;
+        gameObject.GetComponent<SendInfo>().GotStunnedForInfo(stunfreetime);
+    }
 }

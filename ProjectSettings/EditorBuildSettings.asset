@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PhotonFightScene.unity
     guid: 7e7fb31034a51be478a08509cef0d315
+  - enabled: 1
+    path: Assets/Scenes/EndingScreen.unity
+    guid: dc3276a6ab199ad4a857b6f0196238fb
   m_configObjects: {}

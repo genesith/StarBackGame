@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\OverlayScript.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />
      <Compile Include="Assets\Photon Unity Networking\Plugins\PhotonNetwork\Extensions.cs" />
@@ -126,11 +125,13 @@
      <Compile Include="Assets\Scripts\CDManager.cs" />
      <Compile Include="Assets\Scripts\CharSelectManager.cs" />
      <Compile Include="Assets\Scripts\ConstantManager.cs" />
+     <Compile Include="Assets\Scripts\EndingScript.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HealthScript.cs" />
      <Compile Include="Assets\Scripts\HeroScript.cs" />
      <Compile Include="Assets\Scripts\HitParticle.cs" />
      <Compile Include="Assets\Scripts\JigglypuffScript.cs" />
+     <Compile Include="Assets\Scripts\OverlayScript.cs" />
      <Compile Include="Assets\Scripts\PhotonNetworkManager.cs" />
      <Compile Include="Assets\Scripts\PhotonUnitControl.cs" />
      <Compile Include="Assets\Scripts\putin.cs" />

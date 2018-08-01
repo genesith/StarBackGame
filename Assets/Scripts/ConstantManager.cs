@@ -6,7 +6,7 @@ public class ConstantManager : MonoBehaviour {
 
     public static ConstantManager Manager;
     public int[] CharacterList;
-
+    public string endmsg;
 
     // CHANGE WHEN MORE PLAYERS ARE ALLOWED;
     public int numplayers = 2;

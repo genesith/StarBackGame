@@ -79,7 +79,10 @@ public class OverlayScript : MonoBehaviour
         {
             showgametime -= Time.deltaTime;
             if (gametime <= 0)
+            {
                 GameManager.Manager.GameOver();
+                ready = false;
+            }
         }
     }
 

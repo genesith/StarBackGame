@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : Photon.MonoBehaviour {
 
@@ -118,9 +120,34 @@ public class GameManager : Photon.MonoBehaviour {
     public void GameOver()
     {
         Debug.Log("Game Over");
+        if (PhotonNetwork.isMasterClient == true)
+            StartCoroutine(EndingScreen());
+        
     }
 
-    
+    IEnumerator EndingScreen()
+    {
+        Array.Sort(PlayerList, delegate (PlayerClass x, PlayerClass y) { return y.points.CompareTo(x.points); });
+        String sendthis = MakeIntoString(PlayerList);
+        yield return new WaitForSeconds(2.5f);
+        this.GetComponent<PhotonView>().RPC("EndGame", PhotonTargets.All, sendthis);
+    }
 
+    string MakeIntoString(GameManager.PlayerClass[] list)
+    {
+        string str = "";
+        for (int i = 0; i < list.Length; i++)
+        {
+            str += list[i].name + "  " + list[i].kills + "/" + list[i].deaths + "   " + list[i].points + "\n";
+        }
+        return str;
+    }
+
+    [PunRPC]
+    public void EndGame(String endmsg)
+    {
+        ConstantManager.Manager.endmsg = endmsg;
+        SceneManager.LoadSceneAsync(3);
+    }
 
 }

@@ -40,7 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterList: 
-  numplayers: 2
+  endmsg: 
+  numplayers: 4
 --- !u!114 &114873647210779704
 MonoBehaviour:
   m_ObjectHideFlags: 1

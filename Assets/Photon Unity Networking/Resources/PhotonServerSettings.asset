@@ -48,4 +48,5 @@ MonoBehaviour:
   - GotDamaged
   - InitTag
   - IHitSomething
+  - DestroyRPC
   DisableAutoOpenWizard: 1

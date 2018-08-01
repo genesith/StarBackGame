@@ -9,8 +9,10 @@ public class HitParticle : Photon.MonoBehaviour
     int particletype;
     [SerializeField]
     float speed;
+
     public int owningplayer;
-    GameObject OwningObject;
+
+    
     PhotonView OwningphotonView;
 
     public Vector2 newposition;
@@ -34,6 +36,7 @@ public class HitParticle : Photon.MonoBehaviour
             return;
         if (other.tag == "P1" || other.tag == "P2" || other.tag == "P3" || other.tag == "P4")
         {
+            bool DestroyOnHit = true;
             if (other.GetComponent<HeroScript>() != null && (GameManager.Manager.playernum == owningplayer))
         
             {
@@ -44,17 +47,21 @@ public class HitParticle : Photon.MonoBehaviour
                         break;
                     case 1: //푸린 스턴
                         other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All, 2.0f);
+                        DestroyOnHit = false;
                         break;
                     case 2: //푸틴 티타임
                         other.GetComponent<PhotonView>().RPC("putinvictim", PhotonTargets.All);
                         other.GetComponent<PhotonView>().RPC("GotStunned", PhotonTargets.All, 2.0f);
-                        // OwningphotonView.RPC("putinhimself", PhotonTargets.All);
+                        GameManager.PlayerList[owningplayer-1].PlayerObject.GetComponent<PhotonView>().RPC("putinhimself", PhotonTargets.All);
                         break;
                 }
-
+                if (DestroyOnHit)
+                {
+                    gameObject.GetComponent<PhotonView>().RPC("DestroyRPC", PhotonTargets.All);
+                    Destroy(gameObject);
+                }
             }
-            gameObject.GetComponent<PhotonView>().RPC("IHitSomething", PhotonTargets.All);
-            Destroy(gameObject);
+            
         }
         
     }
@@ -75,7 +82,7 @@ public class HitParticle : Photon.MonoBehaviour
         //  OwningObject = owner;
     }
     [PunRPC]
-    public void IHitSomething()
+    public void DestroyRPC()
     {
         Destroy(gameObject);
     }

@@ -14,9 +14,9 @@ public class GameManager : Photon.MonoBehaviour {
 
     public int playernum;
 
-    static PlayerClass[] PlayerList;
+    public static PlayerClass[] PlayerList;
 
-    class PlayerClass
+    public class PlayerClass
     {
         public GameObject PlayerObject;
         public int kills, deaths, points;
